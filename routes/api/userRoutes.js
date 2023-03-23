@@ -19,7 +19,7 @@ const {
   deleteFriend,
 } = require('../../controllers/friendController.js');
 
-// /api/courses
+// /api/:userId/friends/:friendId
 router.route('/:userId/friends/:friendId').post(addFriend).delete(deleteFriend);
 
 module.exports = router;
