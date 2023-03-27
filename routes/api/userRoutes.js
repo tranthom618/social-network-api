@@ -7,19 +7,19 @@ const {
   updateUser,
 } = require('../../controllers/userController');
 
-// /api/user
+// API Route to Get all Users or Create Users
 router.route('/').get(getUser).post(createUser);
 
-// /api/user/:userId
+// API Route to Get Single Users, Update Users or Delete Users
 router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
 
-// Friends
+// Friends Routes
 const {
   addFriend,
   deleteFriend,
 } = require('../../controllers/friendController.js');
 
-// /api/:userId/friends/:friendId
+// API Route to Add Friend or Delete Friend for a User
 router.route('/:userId/friends/:friendId').post(addFriend).delete(deleteFriend);
 
 module.exports = router;

@@ -1,9 +1,10 @@
 const { Schema, Types } = require('mongoose');
 const dateUtil = require("../utils/dateUtil");
 
+// Schema to create a reaction model
 const reactionSchema = new Schema(
   {
-    reactId: {
+    reactionId: {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },

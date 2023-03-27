@@ -5,6 +5,7 @@ module.exports = {
   // Get all users
   getUser(req, res) {
     User.find()
+      .populate('thoughts')
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
@@ -12,15 +13,16 @@ module.exports = {
   // Get a single user
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
+      .populate('thoughts')
       .select('-__v')
-      .then(async (user) =>
+      .then((user) => {
+        console.log(user);
         !user
           ? res.status(404).json({ message: 'No user with that ID' })
           : res.json({
-              user,
-              grade: await grade(req.params.userId),
+              user
             })
-      )
+          })
       .catch((err) => {
         console.log(err);
         return res.status(500).json(err);
@@ -34,7 +36,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  // Delete a student and remove them from the course
+  // Delete a user and removes all their thoughts
   deleteUser(req, res) {
     User.findOneAndRemove({ _id: req.params.userId })
       .then((user) =>
